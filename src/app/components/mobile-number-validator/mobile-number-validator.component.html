@@ -1,0 +1,66 @@
+<main class="form-signin">
+  <div class="card mt-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Mobile Number Verification</h5>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label for="country-code" class="form-label">Country Code</label>
+            <select class="form-select" aria-label="Country Code" [ngClass]="{'is-invalid': isInvalidCode }" id="country-code" [(ngModel)]="countryCode" (change)="onChangeCountryCode()">
+              <option value="" selected>Select Country</option>
+              <option [value]="item.code" *ngFor="let item of countryCodes">
+                {{item.country.country_name}}({{item.country.dialling_code}})</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a Country.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="mobile" class="form-label">Mobile Number</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': isInvalidNumber }" id="mobile" placeholder="Enter Mobile Number" [(ngModel)]="mobileNumber" (keyup)="onEditMobileNumber($event)">
+            <div class="invalid-feedback" >{{mobileNumberErrorMsg}}</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary w-100" (click)="onValidateMobileNumber()">Validate</button>
+    </div>
+  </div>
+  <div class="modal fade" id="mobile-details" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Mobile Number Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCloseModel()"></button>
+        </div>
+        <div class="modal-body">
+          <dl class="row">
+            <dt class="col-sm-5">Valid:</dt>
+            <dd class="col-sm-7">{{mobileDetails.valid}}</dd>
+          
+            <dt class="col-sm-5">Country Code:</dt>
+            <dd class="col-sm-7">{{mobileDetails.country_code}}</dd>
+          
+            <dt class="col-sm-5">Country Name:</dt>
+            <dd class="col-sm-7">{{mobileDetails.country_name}}</dd>
+            
+            <dt class="col-sm-5">Country Prifix:</dt>
+            <dd class="col-sm-7">{{mobileDetails.country_prefix}}</dd>
+
+            <dt class="col-sm-5">Internatinal Format:</dt>
+            <dd class="col-sm-7">{{mobileDetails.international_format}}</dd>
+
+            <dt class="col-sm-5">Line Type:</dt>
+            <dd class="col-sm-7">{{mobileDetails.line_type}}</dd>
+
+            <dt class="col-sm-5">Local Format:</dt>
+            <dd class="col-sm-7">{{mobileDetails.local_format}}</dd>
+
+            <dt class="col-sm-5">Number:</dt>
+            <dd class="col-sm-7">{{mobileDetails.number}}</dd>
+
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
